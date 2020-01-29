@@ -15,6 +15,15 @@ class StateRepresentation:
         if self.mouseX==other.mouseX and self.mouseY==other.mouseY and self.prizeCount==other.prizeCount and self.maze==other.maze:#If mouse positions or prize counts are different, then there's no way for the state to be the same. They're also the fastest to test, so it makes sense to try to short circuit with the fast stuff. Mazes are lists and python lets you compare the actual lists with == instead of the pointers so this works fine too.
             return True#True if they're the same
         return False#False if not.
+    def __str__(self):#For easy printing. Just a nice thing to have. Also inserts the mouse into the maze. We know where it is otherwise, but we can't actually see it in the maze.
+        for i in range(len(self.maze)):#Through columns
+            for j in range(len(self.maze[i])):#through rows
+                if self.mouseX==i and self.mouseY==j:#Checks to see if we hit the mouse's position.
+                    print("P",end="")#Prints the P if we do. Changes end to "" so that we don't have a new line yet. We only need those for each new row of the maze.
+                else:#we haven't found the mouse
+                  print(self.maze[i][j],end="")#so we just print whatever's in the maze normally.
+            print()#Prints a new line for the next column, or for when the whole maze is out.
+
 def transitionFunction(state,direction):#Takes a state representation and a direction to move in. 
     newState=state.copy()#Creates the new state to work from. Prizes are removed once found, so this is necessary to not affect other state representations.
     if direction==0:#0 is North
