@@ -38,3 +38,7 @@ def transitionFunction(state,direction):
             if newState.maze[newState.mouseX][newState.mouseY]==".":
                 newState.prizeCount-=1
     return newState
+def goalTest(state):
+    if state.prizeCount==0:
+        return True
+    return False
