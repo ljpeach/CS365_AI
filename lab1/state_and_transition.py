@@ -54,4 +54,4 @@ def transitionFunction(state,direction):#Takes a state representation and a dire
 def goalTest(state):#Checks if there's success in any given state representation.
     if state.prizeCount==0:#If there are no more prizes to be found,
         return True#we're done!
-    return False#otherwise, we haven't reached our goal.
+    return False
