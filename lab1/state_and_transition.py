@@ -41,8 +41,8 @@ def transitionFunction(state,direction):#Takes a state representation and a dire
         if(newState.maze[newState.mouseX][newState.mouseY-1]!="%"):
             newState.mouseX-=1
     if newState.maze[newState.mouseX][newState.mouseY]==".":#Checks the new adjusted position for a prize.
-                newState.prizeCount-=1#Decrease the number of prizes by 1, since we took the prize from the maze.
-                newState[mouseX][mouseY]=" "#The tile now is empty since the prize is gone. 
+        newState.prizeCount-=1#Decrease the number of prizes by 1, since we took the prize from the maze.
+        newState[mouseX][mouseY]=" "#The tile now is empty since the prize is gone. 
     return newState#Returns the final state.
     
 def goalTest(state):#Checks if there's success in any given state representation.
