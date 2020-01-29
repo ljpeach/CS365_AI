@@ -21,7 +21,7 @@ class StateRepresentation:
                 if self.mouseX==i and self.mouseY==j:#Checks to see if we hit the mouse's position.
                     print("P",end="")#Prints the P if we do. Changes end to "" so that we don't have a new line yet. We only need those for each new row of the maze.
                 else:#we haven't found the mouse
-                  print(self.maze[i][j],end="")#so we just print whatever's in the maze normally.
+                    print(self.maze[i][j],end="")#so we just print whatever's in the maze normally.
             print()#Prints a new line for the next column, or for when the whole maze is out.
 
 def transitionFunction(state,direction):#Takes a state representation and a direction to move in. 
