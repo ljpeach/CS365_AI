@@ -15,7 +15,7 @@ class StateRepresentation:
         if self.mouseX==other.mouseX and self.mouseY==other.mouseY and self.prizeCount==other.prizeCount and self.maze==other.maze:#If mouse positions or prize counts are different, then there's no way for the state to be the same. They're also the fastest to test, so it makes sense to try to short circuit with the fast stuff. Mazes are lists and python lets you compare the actual lists with == instead of the pointers so this works fine too.
             return True#True if they're the same
         return False#False if not.
-    def __str__(self):#For easy printing. Just a nice thing to have. Also inserts the mouse into the maze. We know where it is otherwise, but we can't actually see it in the maze.
+    def printState(self):#For easy printing. Just a nice thing to have. Also inserts the mouse into the maze. We know where it is otherwise, but we can't actually see it in the maze.
         for i in range(len(self.maze)):#Through columns
             for j in range(len(self.maze[i])):#through rows
                 if self.mouseX==i and self.mouseY==j:#Checks to see if we hit the mouse's position.
@@ -29,20 +29,26 @@ def transitionFunction(state,direction):#Takes a state representation and a dire
     if direction==0:#0 is North
         if(newState.maze[newState.mouseX-1][newState.mouseY]!="%"):#0 in the columns is the top of the maze, so moving up decreases the value. If there's a wall in that spot, we skip moving.
             newState.mouseX-=1#Changes the mouse's position in the new state. Same for the other directions.
-        else:#Skips the prize check at the bottom. If we got in here, the move failed and we're done. Same for the other directions.
-            return newState#State is unchanged, but we return it anyway. Consistency!
+        else:
+            return newState
     elif direction==1:#1 is East
         if(newState.maze[newState.mouseX][newState.mouseY+1]!="%"):
-            newState.mouseX-=1
+            newState.mouseY+=1
+        else:
+            return newState
     elif direction==2:#2 is South
         if(newState.maze[newState.mouseX+1][newState.mouseY]!="%"):
-            newState.mouseX-=1
+            newState.mouseX+=1
+        else:
+            return newState
     elif direction==3:#3 is West
         if(newState.maze[newState.mouseX][newState.mouseY-1]!="%"):
-            newState.mouseX-=1
+            newState.mouseY-=1
+        else:
+            return newState
     if newState.maze[newState.mouseX][newState.mouseY]==".":#Checks the new adjusted position for a prize.
-                newState.prizeCount-=1#Decrease the number of prizes by 1, since we took the prize from the maze.
-                newState[mouseX][mouseY]=" "#The tile now is empty since the prize is gone. 
+        newState.prizeCount-=1#Decrease the number of prizes by 1, since we took the prize from the maze.
+        newState.maze[newState.mouseX][newState.mouseY]=" "#The tile now is empty since the prize is gone. 
     return newState#Returns the final state.
     
 def goalTest(state):#Checks if there's success in any given state representation.
