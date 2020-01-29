@@ -22,17 +22,17 @@ def transitionFunction(state,direction):
             newState.mouseX-=1
             if newState.maze[newState.mouseX][newState.mouseY]==".":
                 newState.prizeCount-=1
-    if direction==1#1 is East
+    if direction==1:#1 is East
         if(newState.maze[newState.mouseX][newState.mouseY+1]!="%"):
             newState.mouseX-=1
             if newState.maze[newState.mouseX][newState.mouseY]==".":
                 newState.prizeCount-=1
-    if direction==2#2 is South
+    if direction==2:#2 is South
         if(newState.maze[newState.mouseX+1][newState.mouseY]!="%"):
             newState.mouseX-=1
             if newState.maze[newState.mouseX][newState.mouseY]==".":
                 newState.prizeCount-=1
-    if direction==3#3 is West
+    if direction==3:#3 is West
         if(newState.maze[newState.mouseX][newState.mouseY-1]!="%"):
             newState.mouseX-=1
             if newState.maze[newState.mouseX][newState.mouseY]==".":
