@@ -1,3 +1,6 @@
+
+from CS365.CS365_AI.lab1.maze_initializer import maze_initializer
+
 class StateRepresentation:
     def __init__(self,mouseX,mouseY,pCount,mazeList):
         #using two variables for the mouse's coordinates makes it easy
