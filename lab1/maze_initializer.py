@@ -1,9 +1,9 @@
 '''
-Roger Lu, Liam Peachery, Yanzhi Li
+Roger Lu, Liam Peachey, Yanzhi Li
 CS365 Lab1
 maze_intializer.py
 
-takes a txt file as maze input, operate through terminal
+takes a txt file as maze input.
 '''
 
 import argparse
@@ -48,5 +48,3 @@ def maze_initializer(inputMaze):
 				prize_position.append((i,j))
 
 	return (mouse_position, prize_position, maze_array)
-
-maze_initializer(inputMaze)

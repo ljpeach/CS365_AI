@@ -1,7 +1,20 @@
+from state_and_transition import StateRepresentation,transitionFunction,goalTest
+from maze_initializer import maze_initializer
+import argparse
+
+parser = argparse.ArgumentParser(description="maze reader")
+parser.add_argument('-i', '--input', help = 'Enter the input maze .txt file', \
+	required = True, dest = "inMaze")
+
+args = parser.parse_args()
+
+inputMaze = args.inMaze
+
 class FrontierNode:
     def __init__(self,state,parent):
         self.state=state
         self.parent=parent #Obj of FrontierNode
+
 def path(node,nodesExpanded):#Takes a node, and returns directions
     cost=-1
     currentNode=node
@@ -30,3 +43,7 @@ def single_dfs(initialState):
         if len(frontier)==0:
             break
     return "No Path!!"
+
+mousePos,prizePos,mazeArray = maze_initializer(inputMaze)
+state=StateRepresentation(mousePos[0],mousePos[1],len(prizePos),mazeArray)
+single_dfs(state)
