@@ -1,37 +1,3 @@
-from state_and_transition import StateRepresentation,transitionFunction,goalTest
-from maze_initializer import maze_initializer
-import argparse
-
-parser = argparse.ArgumentParser(description="maze reader")
-parser.add_argument('-i', '--input', help = 'Enter the input maze .txt file', \
-	required = True, dest = "inMaze")
-
-args = parser.parse_args()
-
-inputMaze = args.inMaze
-
-class FrontierAstarNodeWithWeight():
-    def __init__(self,state,parent,weight,depth):
-        self.state=state
-        self.parent=parent
-        self.weight=weight
-        self.depth=depth
-
-def weightCalc(state,prizeLocation):
-    return abs(state.mouseX-prizeLocation[0])+abs(state.mouseY-prizeLocation[1])
-
-def binaryNodeSearch(array,start,stop,searchFor):
-    if start>stop:
-        return start
-    middle=(stop+start)//2
-    goal=array[middle].depth+array[middle].weight
-    if goal==searchFor:
-        return middle
-    elif goal>searchFor:
-        return binaryNodeSearch(array,start,middle-1,searchFor)
-    else:
-        return binaryNodeSearch(array,middle+1,stop,searchFor)
-
 def multi_astar(state,prizeLocations):
     totalCost=0
     prizeNumber=1
@@ -61,11 +27,10 @@ def multi_astar(state,prizeLocations):
         totalCost+=minAstarWeight[0]
         prizeNumber+=1
         if goalTest(state):
-            print("Nodes expanded:",expanded)
-            print("Cost:",totalCost)
             state.printState()
+            print("Cost:",totalCost)
+            print("Nodes expanded:",expanded)
             break
-
 def removePrizes(state,prizes,prizeKeep):
     cleanState=state.copy()
     for i in prizes:
@@ -74,6 +39,7 @@ def removePrizes(state,prizes,prizeKeep):
     cleanState.prizeCount=1
     return cleanState
         
+
 def astarForMulti(initialState,prizeLocation):
     frontier=[FrontierAstarNodeWithWeight(initialState,None,weightCalc(initialState,prizeLocation),0)]
     visitedLocations=[(frontier[0].state.mouseX,frontier[0].state.mouseY,frontier[0].depth+frontier[0].weight)]
@@ -117,7 +83,3 @@ def silentPath(node):
         cost+=1
         currentNode=currentNode.parent
     return cost,node.state
-
-mousePos,prizePos,mazeArray = maze_initializer(inputMaze)
-state = StateRepresentation(mousePos[0],mousePos[1],len(prizePos),mazeArray)
-multi_astar(state,prizePos)
