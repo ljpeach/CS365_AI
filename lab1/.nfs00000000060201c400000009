@@ -27,9 +27,9 @@ def multi_astar(state,prizeLocations):
         totalCost+=minAstarWeight[0]
         prizeNumber+=1
         if goalTest(state):
-            print("Nodes expanded:",expanded)
-            print("Cost:",totalCost)
             state.printState()
+            print("Cost:",totalCost)
+            print("Nodes expanded:",expanded)
             break
 def removePrizes(state,prizes,prizeKeep):
     cleanState=state.copy()
