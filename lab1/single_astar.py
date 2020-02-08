@@ -20,7 +20,7 @@ def binaryNodeSearch(array,start,stop,searchFor)
 
 def single_astar(initialState,prizeLocation):
     frontier=[FrontierAstarNodeWithWeight(initialState,None,weightCalc(initialState,prizeLocation),0)]
-    visitedLocations=[(frontier[0].state.mouseX,frontier[0].state.mouseY)]
+    visitedLocations=[(frontier[0].state.mouseX,frontier[0].state.mouseY,frontier[0].depth+frontier[0].weight)]
     nodesExpanded=0
     while True:
         currentNode=frontier.pop(0)
@@ -30,9 +30,26 @@ def single_astar(initialState,prizeLocation):
             newNode=FrontierAstarNodeWithWeight(temp,currentNode,weightCalc(temp,prizeLocation),currentNode.depth+1)
             if goalTest(temp):
                 return path(newNode,nodesExpanded)
-            if (temp.mouseX,temp.mouseY) not in visitedLocations:
-                frontier.insert(binaryNodeSearch(frontier,0,len(frontier)-1,newNode.weight+newNode.depth),newNode)                
-                visitedLocations.append((temp.mouseX,temp.mouseY))
+            frontierAdd=True
+            updated=False
+            for i in range(len(visitedLocations)):
+                if visitedLocations[i][0]==newNode.state.mouseX and visitedLocations[i][1]==newNode.state.mouseY:
+                    if visitedLocations[i][2]<=newNode.weight+newNode.depth:
+                        frontierAdd=False
+                    else:
+                        visitedLocations[i]=(newNode.state.mouseX,newNode.state.mouseY,newNode.weight+newNode.depth)
+                    updated=True
+                    break
+            if not updated:
+                visitedLocations.append((temp.mouseX,temp.mouseY,newNode.weight+newNode.depth))
+            if frontierAdd:
+                frontier.insert(binaryNodeSearch(frontier,0,len(frontier)-1,newNode.weight+newNode.depth),newNode) 
+                """
+                print("Frontier: ",end="")
+                for i in frontier:
+                    print(i.weight+i.depth,end=", ")
+                print()
+                """
         if len(frontier)==0:
             break
     return "No Path!!"
