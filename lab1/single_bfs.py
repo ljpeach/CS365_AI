@@ -1,3 +1,11 @@
+'''
+Roger Lu, Liam Peachey, Yanzhi Li
+CS365 Lab1
+single_bfs.py
+
+single_bfs API
+'''
+
 from state_and_transition import StateRepresentation,transitionFunction,goalTest
 from maze_initializer import maze_initializer
 import argparse

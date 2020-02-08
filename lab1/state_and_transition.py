@@ -1,3 +1,13 @@
+'''
+Roger Lu, Liam Peachey, Yanzhi Li
+CS365 Lab1
+state_and_transition.py
+
+takes the input from maze_initializer and creates the initial states using
+StateRepresentation class, 
+provides transitionFunction and goalTest.
+'''
+
 from maze_initializer import maze_initializer
 
 class StateRepresentation:

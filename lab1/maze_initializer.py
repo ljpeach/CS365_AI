@@ -44,7 +44,7 @@ def maze_initializer(inputMaze):
 		for j in range(len(maze_array[i])):
 			if maze_array[i][j] == "P":
 				mouse_position = (i,j)
-        maze_array[i][j]=" "#removes standard representation of the mouse from the maze.
+				maze_array[i][j]=" "#removes standard representation of the mouse from the maze.
 			if maze_array[i][j] == ".":
 				prize_position.append((i,j))
 
