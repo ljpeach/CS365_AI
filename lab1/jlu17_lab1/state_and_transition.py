@@ -1,5 +1,14 @@
+'''
+Roger Lu, Liam Peachey, Yanzhi Li
+CS365 Lab1
+state_and_transition.py
 
-from CS365.CS365_AI.lab1.maze_initializer import maze_initializer
+takes the input from maze_initializer and creates the initial states using
+StateRepresentation class, 
+provides transitionFunction and goalTest.
+'''
+
+from maze_initializer import maze_initializer
 
 class StateRepresentation:
     def __init__(self,mouseX,mouseY,pCount,mazeList):
@@ -109,7 +118,7 @@ def transitionFunction(state,direction):
         #Checks the new adjusted position for a prize.
         newState.prizeCount-=1
         #Decrease the number of prizes by 1, since we took the prize from the maze.
-        newState[newState.mouseX][newState.mouseY]=" "
+        newState.maze[newState.mouseX][newState.mouseY]=" "
         #The tile now is empty since the prize is gone. 
     return newState#Returns the final state.
     
